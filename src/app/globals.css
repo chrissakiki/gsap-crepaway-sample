@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer utilities {
   .clip-star {
     clip-path: polygon(
@@ -17,5 +16,14 @@
       2% 35%,
       39% 35%
     );
+  }
+}
+
+@layer utilities {
+  .bg-size-mobile {
+    background-size: 100%;
+  }
+  .bg-size-desktop {
+    background-size: 100%;
   }
 }

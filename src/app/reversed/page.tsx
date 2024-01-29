@@ -44,7 +44,8 @@ export default function Home() {
         },
         (context) => {
           if (!context.conditions) return;
-          let { isDesktop } = context.conditions;
+          let { isDesktop, isMobile, reduceMotion } = context.conditions;
+
           const tl = gsap.timeline({
             scrollTrigger: {
               trigger: '.circle-animate',
@@ -58,21 +59,26 @@ export default function Home() {
           tl.from('.circle-animate', {
             width: isDesktop ? '500px' : '200px',
             height: isDesktop ? '500px' : '200px',
-            delay: isDesktop ? 0.02 : 0,
+            delay: 0.02,
+            backgroundSize: isDesktop ? '300%' : '320%',
             ease: 'power2.out',
+            // borderRadius: '50%',
+            // delay: 0.2,
           });
-          // .to(
-          //   '.vector',
-          //   {
-          //     opacity: 0,
-          //     duration: 0.1,
-          //   },
-          //   10
-          // );
+          // tl.to('.circle-animate', {
+
+          //   // width: '100%',
+          //   // height: '100%',
+          //   borderRadius: '20px',
+          //   duration: 1,
+          //   ease: 'power2.out',
+          // })
         },
         mainRef
       );
-    }, mainRef);
+
+      return () => {};
+    });
 
     return () => ctx.revert();
   }, [windowWidth]);
@@ -80,13 +86,25 @@ export default function Home() {
   return (
     <div ref={mainRef}>
       <div className="h-screen bg-red-500"></div>
-      <div className="h-screen circle-animate-parent flex items-center justify-center overflow-hidden">
-        <div className="h-[200%] md:h-[250%] aspect-square relative circle-animate">
-          <YellowVector className="vector" />
-          <div className="rounded-full bg-[#F2CA45] absolute inset-2 md:inset-5"></div>
+      <div
+        ref={svgRef}
+        className="h-[70vh] md:h-[90vh] circle-animate-parent flex items-center justify-center overflow-hidden"
+      >
+        <div
+          className="h-[300%] bg-size-mobile md:bg-size-desktop  aspect-square bg-no-repeat bg-center rounded-full circle-animate"
+          style={{
+            backgroundImage: 'url("/crepaway1.jfif")',
+          }}
+        ></div>
+        {/* <YellowVector className='circle-animate w-[500px] aspect-square'/> */}
+        {/* <img src="https://picsum.photos/1500" className="w-full h-full" /> */}
+      </div>
+      <div className="h-screen">
+        <div className="w-[10px] aspect-square">
+          {/* <YellowVector className=''/>  */}
+          <ShapeComponent />
         </div>
       </div>
-      <div className="h-screen"></div>
     </div>
   );
 }
