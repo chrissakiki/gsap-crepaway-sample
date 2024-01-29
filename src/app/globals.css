@@ -2,22 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  .clip-star {
-    clip-path: polygon(
-      50% 0%,
-      61% 35%,
-      98% 35%,
-      68% 57%,
-      79% 91%,
-      50% 70%,
-      21% 91%,
-      32% 57%,
-      2% 35%,
-      39% 35%
-    );
-  }
-}
+
 
 @layer utilities {
   .bg-size-mobile {
@@ -25,5 +10,9 @@
   }
   .bg-size-desktop {
     background-size: 100%;
+  }
+
+  .clippedImage {
+    clip-path: circle(18% at 50% 50%);
   }
 }
