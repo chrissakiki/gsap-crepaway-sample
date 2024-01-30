@@ -9,8 +9,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 const ShapeComponent = () => {
   return (
-    <div className='relative w-64 h-64 rounded-full bg-yellow-400 m-8 clip-star'>
-      <div className='absolute inset-0  bg-yellow-400'></div>
+    <div className="relative w-64 h-64 rounded-full bg-yellow-400 m-8 clip-star">
+      <div className="absolute inset-0  bg-yellow-400"></div>
     </div>
   );
 };
@@ -34,26 +34,43 @@ export default function Home() {
   }, []);
   useLayoutEffect(() => {
     let ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: '.clippedImage',
-          start: 'top 90%',
-          end: 'bottom 0',
-          scrub: 1,
-          toggleActions: 'restart none none reset',
-          markers: true,
+      const mm = gsap.matchMedia();
+      const mdBreakPoint = 768;
+
+      mm.add(
+        {
+          isDesktop: `(min-width: ${mdBreakPoint}px)`,
+          isMobile: `(max-width: ${mdBreakPoint}px)`,
+          reduceMotion: '(prefers-reduced-motion: reduce)',
         },
-      });
-      tl.to('.clippedImage', {
-        clipPath: 'circle(100% at 50% 50%)',
-        delay: 0.05,
-        ease: 'power2.out',
-      });
-      tl.to('.clippedImage', {
-        scale: 1.15,
-
-      }, 0.2)
-
+        (context) => {
+          if (!context.conditions) return;
+          let { isDesktop, isMobile, reduceMotion } = context.conditions;
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: '.clippedImage',
+              start: 'top 90%',
+              end: 'bottom 0',
+              scrub: 1,
+              toggleActions: 'restart none none reset',
+              markers: true,
+            },
+          });
+          tl.to('.clippedImage', {
+            clipPath: 'circle(100% at 50% 50%)',
+            delay: 0.2,
+            ease: 'power2.out',
+          });
+          tl.to(
+            '.clippedImage',
+            {
+              scale: 1.15,
+            },
+            0.4
+          );
+        },
+        mainRef
+      );
 
       return () => {};
     });
@@ -63,21 +80,14 @@ export default function Home() {
 
   return (
     <div ref={mainRef}>
-      <div className='h-screen bg-red-500'></div>
-      <div
-        ref={svgRef}
-        className='h-[90vh] circle-animate flex items-center justify-center overflow-hidden relative bg-white'
-      >
-
-          <img
-            src='/crepaway1.jfif'
-            className='clippedImage w-full h-full object-cover'
-          />
-
+      <div className="h-screen bg-red-500"></div>
+      <div className="h-[70vh] md:h-[90vh] circle-animate flex items-center justify-center overflow-hidden relative bg-white">
+        <img
+          src="/crepaway1.jfif"
+          className="clippedImage w-full h-full object-cover"
+        />
       </div>
-      <div className='h-screen'>
-
-      </div>
+      <div className="h-screen"></div>
     </div>
   );
 }

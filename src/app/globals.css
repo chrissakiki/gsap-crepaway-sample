@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 @layer utilities {
   .bg-size-mobile {
     background-size: 100%;
@@ -11,7 +9,13 @@
   .bg-size-desktop {
     background-size: 100%;
   }
+}
 
+.clippedImage {
+  clip-path: circle(30% at 50% 50%);
+}
+
+@media (min-width: 768px) {
   .clippedImage {
     clip-path: circle(18% at 50% 50%);
   }

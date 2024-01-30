@@ -55,10 +55,11 @@ export default function Home() {
               markers: true,
             },
           });
-          tl.from('.circle-animate', {
-            width: isDesktop ? '500px' : '200px',
-            height: isDesktop ? '500px' : '200px',
-            delay: isDesktop ? 0.02 : 0,
+          tl.to('.circle-animate', {
+            // width: isDesktop ? '500px' : '200px',
+            // height: isDesktop ? '500px' : '200px',
+            scale: 1,
+            // delay: isDesktop ? 0.02 : 0,
             ease: 'power2.out',
           });
           // .to(
@@ -80,10 +81,10 @@ export default function Home() {
   return (
     <div ref={mainRef}>
       <div className="h-screen bg-red-500"></div>
-      <div className="h-screen circle-animate-parent flex items-center justify-center overflow-hidden">
-        <div className="h-[200%] md:h-[250%] aspect-square relative circle-animate">
-          <YellowVector className="vector" />
-          <div className="rounded-full bg-[#F2CA45] absolute inset-2 md:inset-5"></div>
+      <div className="h-screen relative overflow-hidden ">
+        <div className="h-[142vmax] w-[142vmax] absolute circle-animate rounded-full scale-[0.1] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden">
+          <div className="bg-[#F2CA45] absolute inset-[4%] rounded-full"></div>
+          <YellowVector className="absolute inset-0" />
         </div>
       </div>
       <div className="h-screen"></div>
